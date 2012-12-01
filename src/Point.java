@@ -1,3 +1,4 @@
+
 /**
  * A self explanatory class.
  * For this assignment you can assume that every point is essentially
@@ -8,48 +9,51 @@
  * @author StudentName
  *
  */
-public class Point
-{
+public class Point {
 
-	public double getx()
-	{
-		//TODO
-		return 0.0;
-	}
+    double x;
+    double y;
 
-	public void setx(double x)
-	{
-		//TODO
-	}
+    public double getx() {
+        //TODO
+        return x;
+    }
 
-	public double gety()
-	{
-		return 0.0;
-	}
+    public void setx(double x) {
+        this.x = x;
+    }
 
-	public void sety(double y)
-	{
-		//TODO
-	}
-	
-	public String toString(){
-		//TODO: Implement toString
-		return "";
-	}
+    public double gety() {
+        return y;
+    }
 
-	//These two methods override the normal java object functions
-	//and may be implemented by the student
-	
-	@Override
-	public int hashCode(){		
-		//TODO: Implement hashCode
-		return -1;
-	}
-	
-	@Override
-	public boolean equals(object o){
-		//TODO: Implement equals
-		return false;
-	}
+    public void sety(double y) {
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        //TODO: Implement toString
+        return "(".concat(this.x.toString()).concat(this.y.toString()).concat(")");
+    }
+
+    //These two methods override the normal java object functions
+    //and may be implemented by the student
+    @Override
+    public int hashCode() {
+        //TODO: Implement hashCode
+        return -1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Point) {
+            Point j = (Point) o;
+            if (this.x == j.x && this.y == j.y) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
-

@@ -1,6 +1,5 @@
-
 import java.util.List;
-import java.lang.Math;
+import java.util.ArrayList;
 
 public class Street {
 
@@ -10,6 +9,9 @@ public class Street {
     List<IntersectionI> intersections; 
     Integer id;
     
+    public Street(){
+        intersections = new ArrayList();
+    }
     
     
     public void setIdNumber(int id){
@@ -48,6 +50,16 @@ public class Street {
         
     }
 
-    public String toString();
+    @Override
+    public String toString(){
+        return "(".
+                concat(Double.toString(firstPoint.getx())).
+                concat(",").
+                concat(Double.toString(firstPoint.gety())).
+                concat(",").
+                concat(name).
+                concat(Double.toString(secondPoint.getx())).
+                concat(Double.toString(secondPoint.gety()));
+    }
 }
 
