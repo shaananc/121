@@ -33,27 +33,30 @@ public class Point {
 
     @Override
     public String toString() {
-        //TODO: Implement toString
-        return "(".concat(this.x.toString()).concat(this.y.toString()).concat(")");
+        return "(".concat(Double.toString(this.x)).
+                concat(Double.toString(this.y))
+                .concat(")");
     }
 
     //These two methods override the normal java object functions
     //and may be implemented by the student
-    @Override
-    public int hashCode() {
-        //TODO: Implement hashCode
-        return -1;
-    }
+//    @Override
+//    public int hashCode() {
+//        //TODO: Implement hashCode
+//        return -1;
+//    }
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Point) {
-            Point j = (Point) o;
-            if (this.x == j.x && this.y == j.y) {
-                return true;
-            }
-        }
-
+        if (o instanceof Point && o.hashCode() == this.hashCode()){return true;}
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 47 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
+        return hash;
     }
 }
