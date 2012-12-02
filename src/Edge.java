@@ -11,6 +11,7 @@ public class Edge {
     public Vertex va;
     public Vertex vb;
     public double weight;
+    public Object obj;
     public Edge(Vertex va, Vertex vb, double weight){
         this.va = va;
         this.vb = vb;

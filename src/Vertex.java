@@ -14,7 +14,7 @@ public class Vertex implements Comparable<Vertex>{
 
     public Object obj;
     public List<Edge> adj;
-    public Vertex prev;
+    public Vertex prev = null;
     public double mindist = Double.POSITIVE_INFINITY;
     
     @Override

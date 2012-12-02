@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this template, choose Tools | Templates
@@ -23,14 +21,14 @@ import java.util.logging.Logger;
 public class GraphMaker {
 
     HashMap<Point, List<StreetI>> points;
-    List<IntersectionI> inters;
+    HashMap<Point, IntersectionI> inters;
     HashSet<StreetI> streets;
 
     public GraphMaker(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         points = new HashMap();
-        inters = new ArrayList();
+        inters = new HashMap();
         streets = new HashSet();
 
         // skip first line
@@ -92,20 +90,14 @@ public class GraphMaker {
                 }
 
                 // Get a list of all the streets at that point
-                Iterator<StreetI> lstreets = points.get(ip[i]).iterator();
-                // For each street at that intersection
-                while (lstreets.hasNext()) {
-                    StreetI curs = lstreets.next();
-                    if (!curs.equals(cur_street)) {
-                        IntersectionI inter = new Intersection();
-                        List<StreetI> finall = new ArrayList();
-                        finall.add(cur_street);
-                        finall.add(curs);
-                        inter.setStreetList(finall);
-                        inter.setPointOfIntersection(ip[i]);
-                        inters.add(inter);
-                    }
-                }
+                List<StreetI> lstreets = points.get(ip[i]);
+                if(!lstreets.contains(cur_street)){
+                    lstreets.add(cur_street);}
+                IntersectionI inter = new Intersection();
+                List<StreetI> finall = new ArrayList();
+                inter.setStreetList(lstreets);
+                inter.setPointOfIntersection(ip[i]);
+                inters.put(ip[i], inter);
 
 
                 i++;
@@ -113,26 +105,29 @@ public class GraphMaker {
 
 
 
-
-
-
-
-
-
-
         }
+
+
+
+
+
+
+
+
+
+
+
         int a = 1;
         a = a + 2;
+
         output();
-
-
     }
 
     private void output() throws IOException {
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("adjacency.txt"));
         Iterator<Point> itr = points.keySet().iterator();
-        
+
         //for each intersection
         while (itr.hasNext()) {
             Point cur_p = itr.next();
@@ -156,12 +151,13 @@ public class GraphMaker {
         writer.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("test\n");
-        try {
-            GraphMaker a = new GraphMaker("ny.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(GraphMaker.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        GraphMaker a = new GraphMaker("ny.txt");
+
+
+
+
     }
 }
