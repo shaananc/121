@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Intersection {
+public class Intersection implements IntersectionI {
 
 	/**
 	 * Returns the point at which this intersection is located at.
