@@ -39,6 +39,7 @@ public class Point {
     @Override
     public String toString() {
         return "(".concat(Double.toString(this.x)).
+                concat(",").
                 concat(Double.toString(this.y))
                 .concat(")");
     }

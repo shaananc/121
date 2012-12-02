@@ -7,7 +7,7 @@ public class Street implements StreetI {
     Point secondPoint;
     String name;
     List<IntersectionI> intersections; 
-    Integer id;
+    int id;
     
     public Street(){
         intersections = new ArrayList();
@@ -66,8 +66,29 @@ public class Street implements StreetI {
                 concat(Double.toString(firstPoint.gety())).
                 concat(",").
                 concat(name).
+                concat(",").
                 concat(Double.toString(secondPoint.getx())).
-                concat(Double.toString(secondPoint.gety()));
+                concat(",").
+                concat(Double.toString(secondPoint.gety())).
+                concat(")");
+    }
+    
+    @Override
+    public boolean equals(Object o){
+      if (o instanceof Street && ((Street) o).hashCode() == this.hashCode()){
+          return true;
+      }
+      return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + (this.firstPoint != null ? this.firstPoint.hashCode() : 0);
+        hash = 29 * hash + (this.secondPoint != null ? this.secondPoint.hashCode() : 0);
+        hash = 29 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 29 * hash + this.id;
+        return hash;
     }
 }
 

@@ -15,11 +15,11 @@ public class Vertex implements Comparable<Vertex>{
     public Object obj;
     public List<Edge> adj;
     public Vertex prev;
-    public double mind = Double.POSITIVE_INFINITY;
+    public double mindist = Double.POSITIVE_INFINITY;
     
     @Override
     public int compareTo(Vertex o){
-        return Double.compare(mind, o.mind);
+        return Double.compare(mindist, o.mindist);
     }
     
 
