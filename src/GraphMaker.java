@@ -20,9 +20,12 @@ import java.util.Iterator;
  */
 public class GraphMaker {
 
-    HashMap<Point, List<StreetI>> points;
-    HashMap<Point, IntersectionI> inters;
-    HashSet<StreetI> streets;
+    // This is the adjacency list
+    public HashMap<Point, List<StreetI>> points;
+    // List of intersections
+    public HashMap<Point, eIntersection> inters;
+    // List of streets
+    public HashSet<StreetI> streets;
 
     public GraphMaker(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -55,10 +58,6 @@ public class GraphMaker {
             ip[0] = null;
             ip[1] = null;
 
-//            if (cur_street.getName().equals("9th Ave")) {
-//                int a = 0;
-//                a = 1;
-//            }
 
             // List containing just the current street
             List<StreetI> temp = new ArrayList();
@@ -74,8 +73,23 @@ public class GraphMaker {
             }
 
             // If have seen the second point before
+
+
             if (points.containsKey(pointSecond)) {
-                points.get(pointSecond).add(cur_street);
+                if (pointFirst.x == 39.949838 && pointFirst.y == -75.192633 && pointSecond.x == 39.949787 && pointSecond.y == -75.192646) {
+                    int a;
+                    a = 0;
+                }
+                                //Hash code for bugone: 1815457517
+                Point tp = new Point(39.949660, -75.192674);
+                Point tg = new Point(39.949787,-75.192646);
+                
+                List<StreetI> streets2 = points.get(pointSecond);
+                streets2.add(cur_street);
+
+
+                
+                
                 ip[1] = pointSecond;
             } else {
                 points.put(pointSecond, temp);
@@ -91,9 +105,10 @@ public class GraphMaker {
 
                 // Get a list of all the streets at that point
                 List<StreetI> lstreets = points.get(ip[i]);
-                if(!lstreets.contains(cur_street)){
-                    lstreets.add(cur_street);}
-                IntersectionI inter = new Intersection();
+                if (!lstreets.contains(cur_street)) {
+                    lstreets.add(cur_street);
+                }
+                eIntersection inter = new eIntersection();
                 List<StreetI> finall = new ArrayList();
                 inter.setStreetList(lstreets);
                 inter.setPointOfIntersection(ip[i]);
@@ -131,22 +146,22 @@ public class GraphMaker {
         //for each intersection
         while (itr.hasNext()) {
             Point cur_p = itr.next();
-            System.out.print(cur_p.toString());
-            System.out.print(" Adjacent to:");
+            //System.out.print(cur_p.toString());
+            //System.out.print(" Adjacent to:");
             writer.write(cur_p.toString());
             writer.write(" Adjacent to:");
             Iterator<StreetI> streetitr = points.get(cur_p).iterator();
             //for each street in the intersection
             while (streetitr.hasNext()) {
                 StreetI cur_street = streetitr.next();
-                System.out.print(cur_street.toString());
-                System.out.print(",");
+                //System.out.print(cur_street.toString());
+                //System.out.print(",");
                 writer.write(cur_street.toString());
                 writer.write(",");
 
             }
             writer.write("\n");
-            System.out.print("\n");
+            //System.out.print("\n");
         }
         writer.close();
     }
