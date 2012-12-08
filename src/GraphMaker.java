@@ -26,8 +26,12 @@ public class GraphMaker {
     public HashMap<Point, eIntersection> inters;
     // List of streets
     public HashSet<StreetI> streets;
+    
+    //Filename public
+    public String filename;
 
     public GraphMaker(String filename) throws IOException {
+        this.filename = filename;
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         points = new HashMap();
@@ -59,9 +63,7 @@ public class GraphMaker {
             ip[1] = null;
 
 
-            // List containing just the current street
-            List<StreetI> temp = new ArrayList();
-            temp.add(cur_street);
+
 
             // If have seen the first point before
             if (points.containsKey(pointFirst)) {
@@ -69,6 +71,9 @@ public class GraphMaker {
                 points.get(pointFirst).add(cur_street);
 
             } else {
+                // List containing just the current street
+                List<StreetI> temp = new ArrayList();
+                temp.add(cur_street);
                 points.put(pointFirst, temp);
             }
 
@@ -80,18 +85,21 @@ public class GraphMaker {
                     int a;
                     a = 0;
                 }
-                                //Hash code for bugone: 1815457517
+                //Hash code for bugone: 1815457517
                 Point tp = new Point(39.949660, -75.192674);
-                Point tg = new Point(39.949787,-75.192646);
-                
+                Point tg = new Point(39.949787, -75.192646);
+
                 List<StreetI> streets2 = points.get(pointSecond);
                 streets2.add(cur_street);
 
 
-                
-                
+
+
                 ip[1] = pointSecond;
             } else {
+                // List containing just the current street
+                List<StreetI> temp = new ArrayList();
+                temp.add(cur_street);
                 points.put(pointSecond, temp);
             }
 
@@ -146,22 +154,35 @@ public class GraphMaker {
         //for each intersection
         while (itr.hasNext()) {
             Point cur_p = itr.next();
-            //System.out.print(cur_p.toString());
-            //System.out.print(" Adjacent to:");
             writer.write(cur_p.toString());
             writer.write(" Adjacent to:");
             Iterator<StreetI> streetitr = points.get(cur_p).iterator();
             //for each street in the intersection
             while (streetitr.hasNext()) {
+
                 StreetI cur_street = streetitr.next();
-                //System.out.print(cur_street.toString());
-                //System.out.print(",");
-                writer.write(cur_street.toString());
+                writer.write("(");
+                if (cur_p.equals(cur_street.getFirstPoint())) {
+
+                    writer.write(Double.toString(cur_street.getFirstPoint().getx()));
+                    writer.write(",");
+                    writer.write(Double.toString(cur_street.getFirstPoint().gety()));
+
+                } else {
+                    writer.write(Double.toString(cur_street.getSecondPoint().getx()));
+                    writer.write(",");
+                    writer.write(Double.toString(cur_street.getSecondPoint().gety()));
+                }
+                writer.write(",");
+                writer.write(cur_street.getName());
+                writer.write(",");
+                writer.write(Integer.toString(cur_street.getIdNumber()));
+                writer.write(")");
+
                 writer.write(",");
 
             }
             writer.write("\n");
-            //System.out.print("\n");
         }
         writer.close();
     }

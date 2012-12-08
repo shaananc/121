@@ -1,3 +1,4 @@
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -6,62 +7,60 @@ public class Street implements StreetI {
     Point firstPoint;
     Point secondPoint;
     String name;
-    List<IntersectionI> intersections; 
+    //List<IntersectionI> intersections;
     int id;
-    
-    public Street(){
-        intersections = new ArrayList();
+
+    public Street() {
+        //intersections = new ArrayList();
     }
-    
-    
+
     @Override
-    public void setIdNumber(int id){
+    public void setIdNumber(int id) {
         this.id = id;
     }
 
     @Override
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     @Override
-    public void setPoints(Point firstPoint, Point secondPoint){
+    public void setPoints(Point firstPoint, Point secondPoint) {
         this.firstPoint = firstPoint;
         this.secondPoint = secondPoint;
     }
 
     @Override
-    public Point getFirstPoint(){
+    public Point getFirstPoint() {
         return this.firstPoint;
     }
 
     @Override
-    public Point getSecondPoint(){
+    public Point getSecondPoint() {
         return this.secondPoint;
     }
 
     @Override
-    public int getIdNumber(){
+    public int getIdNumber() {
         return id;
     }
 
     //Distance Formula
     @Override
-    public Double getDistance(){
+    public Double getDistance() {
         //sqrt((x2-x1)^2+(y2-y1)^2)
-        return Math.sqrt(Math.pow((secondPoint.getx()-firstPoint.getx()),2.0)+Math.pow((secondPoint.gety()-firstPoint.gety()),2.0) );
-        
+        Double ret = Math.sqrt(Math.pow((secondPoint.getx() - firstPoint.getx()), 2.0) + Math.pow((secondPoint.gety() - firstPoint.gety()), 2.0));
+        return ret;
     }
 
     @Override
-    public String toString(){
-        return "(".
-                concat(Double.toString(firstPoint.getx())).
+    public String toString() {
+        return "(".concat(Double.toString(firstPoint.getx())).
                 concat(",").
                 concat(Double.toString(firstPoint.gety())).
                 concat(",").
@@ -72,13 +71,17 @@ public class Street implements StreetI {
                 concat(Double.toString(secondPoint.gety())).
                 concat(")");
     }
-    
+
     @Override
-    public boolean equals(Object o){
-      if (o instanceof Street && ((Street) o).hashCode() == this.hashCode()){
-          return true;
-      }
-      return false;
+    public boolean equals(Object o) {
+        if (o instanceof Street && 
+                ((Street) o).firstPoint.equals(this.firstPoint) &&
+                ((Street) o).secondPoint.equals(this.secondPoint) &&
+                ((Street) o).name.equals(this.name)
+                ) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -91,4 +94,3 @@ public class Street implements StreetI {
         return hash;
     }
 }
-

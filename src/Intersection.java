@@ -61,6 +61,10 @@ public class Intersection implements IntersectionI {
             }
             return null;
         }
+
+
+        
+
 }
 
 

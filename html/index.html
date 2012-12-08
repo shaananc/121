@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
 	<link rel="stylesheet" href="style.css" type="text/css"/>
     <title>CIS 121 Final Project</title>
     <!--     Change this to the key you are using -->
@@ -10,12 +11,24 @@
 	<script type= "text/javascript" src="points1.js"></script>
 	<script type= "text/javascript" src="points2.js"></script>
 	<script type= "text/javascript" src="points3.js"></script>
+<script type= "text/javascript" src="js/bootstrap.min.js"></script>
+<script type= "text/javascript" src="js/bootstrap-responsive.min.js"></script>
     <script type= "text/javascript" src="functions.js"></script>
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+
   </head>
   <body onload="javascript: load()" onunload="javascript:GUnload()">
+<div class="container">
+<div class="hero-unit">
 	<h1> CIS 121 Final Project</h1>
 	<h2 class= "subTitle"> Fall 2012</h2>
-	<h3 id = "studentName">by YOUR NAME</h3>
+	<h3 id = "studentName">by Shaanan Cohney</h3>
 	<hr/>
 	<div align="right">
 		<select id="selectInput" onchange="changeFile(this)">
@@ -37,5 +50,7 @@
 	</div>
     <div class="map" id="map3">
 	</div>
+</div>
+</div>
   </body>
 </html>

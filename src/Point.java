@@ -13,8 +13,8 @@ public class Point {
 
     double x;
     double y;
-    
-    public Point(double x, double y){
+
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -40,8 +40,7 @@ public class Point {
     public String toString() {
         return "(".concat(Double.toString(this.x)).
                 concat(",").
-                concat(Double.toString(this.y))
-                .concat(")");
+                concat(Double.toString(this.y)).concat(")");
     }
 
     //These two methods override the normal java object functions
@@ -51,16 +50,22 @@ public class Point {
 //        //TODO: Implement hashCode
 //        return -1;
 //    }
-
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Point && o.hashCode() == this.hashCode()){return true;}
+        Point p = (Point)o;
+        if (o instanceof Point &&
+                (p.x == this.x) &&
+                (p.y == this.y)
+                ) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
+
         hash = 47 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
         hash = 47 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
         return hash;
